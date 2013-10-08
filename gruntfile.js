@@ -12,31 +12,36 @@ module.exports = function(grunt) {
 
       gamecore: {
         src:  PATHS.gamecore.map(function(path){return 'vendors/gamecore.js/src/'+path}),
-        dest: 'game/scripts/gamecore.js'
+        dest: 'www-root/scripts/gamecore.js'
       },
 
       playcraft: {
         src:  PATHS.playcraft.map(function(path){return 'vendors/playcraftengine/playcraftjs/lib/'+path}),
-        dest: 'game/scripts/playcraft.js'
+        dest: 'www-root/scripts/playcraft.js'
       },
       
       game: {
-        src:  ['lib/game.js','lib/**/*.js'],
-        dest: 'game/scripts/game.js'
+        src:  ['src/game/game.js','src/**/*.js'],
+        dest: 'www-root/scripts/game.js'
       }
     },
 
     watch: {
       game: {
-        files: 'lib/**/*.js',
+        files: 'src/**/*.js',
         tasks: ['concat_sourcemap:game']
+      },
+
+      html: {
+        files: 'src/**/*.html',
+        tasks: ['copy:html']
       }
     },
 
     symlink: {
       assets: {
         src: './assets',
-        dest: './game/assets'
+        dest: './www-root/assets'
       }
     },
 
@@ -44,18 +49,33 @@ module.exports = function(grunt) {
       server: {
         options:{
           port:8282,
-          base: 'game'
+          base: 'www-root'
         }
+      }
+    },
+
+    copy: {
+      html: {
+        files: [
+          {
+            expand: true,
+            cwd: './src/',
+            src: ['**/*.html'],
+            dest: './www-root/',
+            filter: 'isFile'
+          }
+        ]
       }
     }
 
   });
 
-  grunt.registerTask('install', ['concat_sourcemap', 'symlink']);
-  grunt.registerTask('run', ['connect:server','watch:game']);
+  grunt.registerTask('install', ['concat_sourcemap', 'symlink:assets', 'copy:html']);
+  grunt.registerTask('run', ['connect:server','watch']);
 
   grunt.loadNpmTasks('grunt-concat-sourcemap');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 };
