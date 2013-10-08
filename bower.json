@@ -1,0 +1,7 @@
+{
+  "name": "Abyss",
+  "dependencies": {
+    "playcraftengine": "https://github.com/martinwells/playcraftengine.git#master",
+    "gamecore.js": "https://github.com/playcraft/gamecore.js.git#master"
+  }
+}
