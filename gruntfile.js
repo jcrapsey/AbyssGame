@@ -12,23 +12,23 @@ module.exports = function(grunt) {
 
       gamecore: {
         src:  PATHS.gamecore.map(function(path){return 'vendors/gamecore.js/src/'+path}),
-        dest: 'game/scripts/gamecore.js'
+        dest: 'www-root/scripts/gamecore.js'
       },
 
       playcraft: {
         src:  PATHS.playcraft.map(function(path){return 'vendors/playcraftengine/playcraftjs/lib/'+path}),
-        dest: 'game/scripts/playcraft.js'
+        dest: 'www-root/scripts/playcraft.js'
       },
       
       game: {
-        src:  ['lib/game.js','lib/**/*.js'],
-        dest: 'game/scripts/game.js'
+        src:  ['src/game/game.js','src/**/*.js'],
+        dest: 'www-root/scripts/game.js'
       }
     },
 
     watch: {
       game: {
-        files: 'lib/**/*.js',
+        files: 'src/**/*.js',
         tasks: ['concat_sourcemap:game']
       }
     },
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     symlink: {
       assets: {
         src: './assets',
-        dest: './game/assets'
+        dest: './www-root/assets'
       }
     },
 
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
       server: {
         options:{
           port:8282,
-          base: 'game'
+          base: 'www-root'
         }
       }
     }
