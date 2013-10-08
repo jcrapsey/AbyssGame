@@ -47,6 +47,20 @@ module.exports = function(grunt) {
           base: 'www-root'
         }
       }
+    },
+
+    copy: {
+      html: {
+        files: [
+          {
+            expand: true,
+            cwd: './src/',
+            src: ['**/*.html'],
+            dest: './www-root/',
+            filter: 'isFile'
+          }
+        ]
+      }
     }
 
   });
@@ -58,4 +72,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 };
