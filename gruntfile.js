@@ -30,6 +30,11 @@ module.exports = function(grunt) {
       game: {
         files: 'src/**/*.js',
         tasks: ['concat_sourcemap:game']
+      },
+
+      html: {
+        files: 'src/**/*.html',
+        tasks: ['copy:html']
       }
     },
 
