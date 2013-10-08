@@ -70,8 +70,8 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('install', ['concat_sourcemap', 'symlink']);
-  grunt.registerTask('run', ['connect:server','watch:game']);
+  grunt.registerTask('install', ['concat_sourcemap', 'symlink:assets', 'copy:html']);
+  grunt.registerTask('run', ['connect:server','watch']);
 
   grunt.loadNpmTasks('grunt-concat-sourcemap');
   grunt.loadNpmTasks('grunt-contrib-watch');
