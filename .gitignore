@@ -1,8 +1,7 @@
 # Project #
 ###########
 vendors
-game/assets
-game/scripts
+www-root
 
 # Node #
 ########
