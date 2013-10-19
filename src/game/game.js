@@ -16,14 +16,14 @@ Abyss = pc.Game.extend('Abyss',
 
     init: function(){
       this._super();
-      pc.device.scale = 5;
-      pc.device.scaledCanvas = document.getElementById("pcGameCanvasScale");
     },
 
     onReady:function ()
     {
       this._super();
-      pc.device.onResize(this.onResize);
+
+      pc.device.resize(200,150);
+      pc.device.scale = 4;
 
       // load resources
       pc.device.loader.setDisableCache();
@@ -49,22 +49,5 @@ Abyss = pc.Game.extend('Abyss',
 
       this.gameScene = new DevScene();
       pc.device.game.addScene(this.gameScene);
-    },
-
-    onResize: function(){
-      pc.device.scaledCanvas.width = pc.device.canvasWidth * pc.device.scale;
-      pc.device.scaledCanvas.height = pc.device.canvasHeight * pc.device.scale;
-      pc.device.scaledCtx = pc.device.scaledCanvas.getContext('2d');
-      pc.device.scaledCtx.scale(pc.device.scale, pc.device.scale);
-      pc.device.scaledCtx.imageSmoothingEnabled = false
-      //pc.device.ctx.imageSmoothingEnabled = false;
-      //pc.device.scale = 5;
-      //pc.device.ctx.scale(5,5);
-    },
-
-    process: function(){
-      this._super();
-      pc.device.scaledCtx.clearRect(0, 0, pc.device.scaledCanvas.width, pc.device.scaledCanvas.height);      
-      pc.device.scaledCtx.drawImage(pc.device.canvas, 0, 0);
     }
 });
