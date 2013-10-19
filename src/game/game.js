@@ -22,6 +22,8 @@ Abyss = pc.Game.extend('Abyss',
     {
       this._super();
 
+      pc.device.resize(200,150);
+
       // load resources
       pc.device.loader.setDisableCache();
       pc.device.loader.add(new pc.DataResource('DevMap', 'assets/maps/DevMap.tmx'));
