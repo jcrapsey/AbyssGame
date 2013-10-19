@@ -28,8 +28,34 @@
 	<script type="text/javascript" src="scripts/gamecore.js"></script>
 	<script type="text/javascript" src="scripts/playcraft.js"></script>
 	<script type="text/javascript">
-		pc.start('pcGameCanvas', 'Abyss', 'scripts/', ['game.js']);
+	(function(){
+		var scaledView = document.getElementById('gameCanvas');
+		var scaledCtx = scaledView.getContext('2d');
+		var curWidth = 0;
+		var curHeight = 0;
+		var curScale = 0;
 
+		pc.start(null, 'Abyss', 'scripts/', ['game.js']);
+		pc.device.scale = 2;
+
+		(function tik(){
+			if(pc.device.canvas){
+				if(curWidth !== pc.device.canvas.width || curHeight !== pc.device.canvas.height || curScale !== pc.device.scale
+				{
+					curWidth = pc.device.canvas.width;
+					curHeight = pc.device.canvas.height;
+					curScale = pc.device.scale;
+					scaledView.width = curWidth * pc.device.scale;
+					scaledView.height = curHeight * pc.device.scale;
+					scaledCtx.scale(pc.device.scale, pc.device.scale);
+					scaledCtx.imageSmoothingEnabled = false;
+				}
+				scaledCtx.clearRect(0, 0, scaledView.width, scaledView.height);
+				scaledCtx.drawImage(pc.device.canvas, 0, 0);
+			}
+			requestAnimationFrame(tik);
+		}());
+	}());
 	</script>
 </body>
 </html>
